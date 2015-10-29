@@ -39,6 +39,8 @@ class eZWaitUntilDateType  extends eZWorkflowEventType
         }
 
         $version = $object->version( $parameters['version'] );
+        if (!$version)
+            return eZWorkflowType::STATUS_WORKFLOW_CANCELLED;
         $objectAttributes = $version->attribute( 'contentobject_attributes' );
         $waitUntilDateObject = $this->workflowEventContent( $event );
         $waitUntilDateEntryList = $waitUntilDateObject->attribute( 'classattribute_id_list' );
